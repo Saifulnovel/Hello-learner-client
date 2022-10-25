@@ -8,9 +8,9 @@ const Main = () => {
       <div>
         <Navbar />
             <div className='grid grid-rows grid-flow-col gap-4'>
-                <div className='border col-span-3'> <SideNav></SideNav> </div>
+                <div className='border col-span-2'> <SideNav></SideNav> </div>
                 
-          <div className='col-span-9'><Outlet/> </div>
+          <div className='col-span-10'><Outlet/> </div>
         </div>
       </div>
     );
