@@ -5,21 +5,31 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/auth-context';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import app from '../../Config/firebase.config';
 
 const auth = getAuth(app)
 
 const SignUp = () => {
 
-const { providerLogin } = useContext(AuthContext);
+const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
   
- const  googleProvider = new GoogleAuthProvider()
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
  const [error, setError] = useState({ email: "", password: "" });
     const [userInfo, SetUserInfo] = useState({ email: "", password: "" });
     
-    const handleGoogleSignin = () => {
+  const handleFacebookSignin = () => {
+    fbLoginProvider(facebookProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  }  
+  
+  const handleGoogleSignin = () => {
       providerLogin(googleProvider)
         .then((result) => {
           const user = result.user;
@@ -33,10 +43,28 @@ const { providerLogin } = useContext(AuthContext);
         event.preventDefault();
         const email = userInfo.email;
         const password = userInfo.password;
-        console.log(email, password)
+        // console.log(email, password)
         
-        // logIn(auth, email, password)
-    }
+      register(auth, email, password)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+          userInfo.reset();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+  //  const handleUpdateUserProfile = (name, photoURL) => {
+  //    const profile = {
+  //      displayName: name,
+  //      photoURL: photoURL,
+  //    };
+
+  //    updateUserProfile(profile)
+  //      .then(() => {})
+  //      .catch((error) => console.error(error));
+  //  };
 
   const handleEmail = (event) => {
       const email = event.target.value;
@@ -131,11 +159,10 @@ const { providerLogin } = useContext(AuthContext);
               </div>
             </form>
           </div>
-
-          <div className=" bg-base-100 p-8 shadow hover:shadow-lg rounded-lg">
-            <h2 className="text-center">OR</h2>
-            <div>
-              <button className="btn btn-outline btn-info mb-4 ">
+          <h2 className="text-center font-bold text-2xl">OR</h2>
+          <div className=" bg-base-100 p-8 shadow-gray-700 shadow-2xl hover:shadow-lg rounded-lg">
+            <div className="mt-5">
+              <button onClick={handleFacebookSignin} className="btn btn-outline btn-info mb-4 ">
                 <FaFacebook className="mr-5 text-2xl" /> Sign in With Facebook
               </button>
             </div>
