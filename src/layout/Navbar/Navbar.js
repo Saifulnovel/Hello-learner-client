@@ -73,6 +73,9 @@ const Navbar = () => {
             <li>
               <Link to="/blog">Blog</Link>
             </li>
+            <li>
+              <Link to="/faq">FAQ</Link>
+            </li>
           </ul>
         </div>
         <img className="w-8" src={logo} alt="" />
@@ -91,34 +94,35 @@ const Navbar = () => {
           <li>
             <Link to="/courseindex">Courses</Link>
           </li>
-        
+
           <li>
             <Link to="/blog">Blog</Link>
           </li>
-          
+          <li>
+            <Link to="/faq">FAQ</Link>
+          </li>
         </ul>
       </div>
 
       <div className="navbar-end">
-        { user?.uid ? 
+        {user?.uid ? (
           <>
-            <div data-tip={user?.displayName} className="w-16 tooltip tooltip-left rounded-full">
-
-              {
-                user?.photoURL ?
-                  <img src={user?.photoURL} alt="DP" />
-                  :
-                  <FaUserCircle/>
-                
-
-            }
+            <div
+              data-tip={user?.displayName}
+              className="w-16 tooltip tooltip-left rounded-full"
+            >
+              {user?.photoURL ? (
+                <img src={user?.photoURL} alt="DP" />
+              ) : (
+                <FaUserCircle />
+              )}
             </div>
             <button onClick={logOut} className="btn btn-outline">
               <FaSignOutAlt></FaSignOutAlt>
               <span className="ml-2">Sign out</span>{" "}
             </button>
           </>
-         : (
+        ) : (
           <>
             <div className="text-white mx-5">
               <span>{user?.email}</span>

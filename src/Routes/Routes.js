@@ -7,6 +7,7 @@ import CourseIndex from "../component/Courses/CourseIndex";
 import Courses from '../component/Courses/Courses';
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Blog from "../layout/Main/Blog/Blog";
+import Faq from "../layout/Main/Faq/Faq";
 import Home from "../layout/Main/Home/Home";
 import Main from "../layout/Main/Main";
 import CheckOut from "../PrivateRoutes/CheckOut/CheckOut";
@@ -58,6 +59,10 @@ const routes = createBrowserRouter([
             <CheckOut />
           </PrivateRouter>
         ),
+      },
+      {
+        path: '/faq',
+        element:<Faq/>
       },
       {
         path: "*",
