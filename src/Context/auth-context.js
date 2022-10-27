@@ -26,13 +26,16 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, provider )
       }
     
-    const register = (mail, pass) => {
+  const register = (mail, pass) => {
+    setLoading(true);
         return createUserWithEmailAndPassword(auth, mail, pass)
   }
-   const emailLogin = (email, password) => {
+  const emailLogin = (email, password) => {
+     setLoading(true)
      return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);   
   }
   useEffect(() => {
@@ -40,6 +43,7 @@ const AuthProvider = ({ children }) => {
 
       console.log(currentUser);
       setUser(currentUser)
+      setLoading(false);
     })  
      
     return () => unSubscribe();

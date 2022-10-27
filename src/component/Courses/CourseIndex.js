@@ -18,10 +18,7 @@ const CourseIndex = () => {
         </h3>
         <ul className="menu text-center ">
           {datas.map((data) => (
-            <li
-              key={data.id}
-              className="hover-bordered mb-1  mx-auto"
-            >
+            <li key={data.id} className="hover-bordered mb-1  mx-auto">
               <Link to={`/courses/${data.id}`}>{data.name}</Link>
             </li>
           ))}
