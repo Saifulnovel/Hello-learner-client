@@ -27,6 +27,7 @@ const Courses = () => {
               <button className="btn btn-outline">Get Premium Access</button>
             </Link>
           </div>
+        
         </div>
       </div>
     );

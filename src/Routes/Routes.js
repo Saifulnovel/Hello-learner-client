@@ -9,8 +9,11 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import Blog from "../layout/Main/Blog/Blog";
 import Home from "../layout/Main/Home/Home";
 import Main from "../layout/Main/Main";
-import CheckOut from "../PrivateRoutes/CheckOut";
+import CheckOut from "../PrivateRoutes/CheckOut/CheckOut";
 import PrivateRouter from "../PrivateRoutes/PrivateRouter";
+
+
+
 
 const routes = createBrowserRouter([
   {
@@ -18,7 +21,7 @@ const routes = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
 
@@ -60,6 +63,7 @@ const routes = createBrowserRouter([
         path: "*",
         element: <ErrorPage />,
       },
+
       //   {
       //     path: "/signup",
       //     element: <Signup />,

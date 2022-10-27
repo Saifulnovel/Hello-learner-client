@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo1 from '../asset/1.svg'
 import logo2 from '../asset/2.svg'
 import logo3 from "../asset/3.svg"
@@ -10,23 +11,25 @@ const Home = () => {
       <div>
         <div className="header bg-zinc-800 mx-auto text-center pb-16">
           <h1 className="text-zinc-50 text-6xl font-bold py-16">
-            The best way to learn to code
+            Start Your Journey with HELLO LEARNER , Now
           </h1>
           <div className="desc text-zinc-200 text-2xl font-normal mb-8">
             <p>
               {" "}
-              is an online interactive platform that helps users to learn,
-              practice coding skills and join the developer community with
-              millions of programmers.
+              Hello learner is an online interactive platform that helps users
+              to learn, practice coding skills and join the developer community
+              with millions of programmers.
             </p>
             <p>
               Join our global community.{" "}
               <span className="font-bold">It's free.</span>
             </p>
           </div>
-          <button className="btn btn-wide btn-info rounded-md hover:bg-sky-700">
-            Start Learning Now
-          </button>
+          <Link to='/courseindex'>
+            <button className="btn btn-wide btn-info rounded-md hover:bg-sky-700">
+              Start Learning Now
+            </button>
+          </Link>
         </div>
 
         <div className="pb-24">

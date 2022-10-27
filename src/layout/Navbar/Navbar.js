@@ -86,52 +86,40 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>
-            <Link to="/home"> Home</Link>
+            <Link to="/"> Home</Link>
           </li>
           <li>
             <Link to="/courseindex">Courses</Link>
           </li>
-          {/* <li tabIndex={0}>
-            <a>
-              Parent
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </a>
-            <ul className="p-2">
-              <li>
-                <a>Submenu 1</a>
-              </li>
-              <li>
-                <a>Submenu 2</a>
-              </li>
-            </ul>
-          </li> */}
+        
           <li>
             <Link to="/blog">Blog</Link>
           </li>
-          {/* <li>
-            <span>{user?.email}</span>
-          </li> */}
+          
         </ul>
       </div>
 
       <div className="navbar-end">
-        {user?.uid ? (
-          <button onClick={logOut} className="btn btn-outline"><FaSignOutAlt></FaSignOutAlt><span className="ml-2">Sign out</span>   </button>
-        ) : (
+        { user?.uid ? 
           <>
-            {{ user } && (
-              <span>
-                <FaUserCircle />
-              </span>
-            )}
+            <div data-tip={user?.displayName} className="w-16 tooltip tooltip-left rounded-full">
+
+              {
+                user?.photoURL ?
+                  <img src={user?.photoURL} alt="DP" />
+                  :
+                  <FaUserCircle/>
+                
+
+            }
+            </div>
+            <button onClick={logOut} className="btn btn-outline">
+              <FaSignOutAlt></FaSignOutAlt>
+              <span className="ml-2">Sign out</span>{" "}
+            </button>
+          </>
+         : (
+          <>
             <div className="text-white mx-5">
               <span>{user?.email}</span>
             </div>

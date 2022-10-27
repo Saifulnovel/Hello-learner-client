@@ -13,7 +13,8 @@ const auth = getAuth(app)
 
 const SignUp = () => {
 
-const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
+const { providerLogin, fbLoginProvider, register, userProfileInfo } =
+  useContext(AuthContext);
   
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
@@ -43,7 +44,9 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const mail = userInfo.email;
-    const pass = userInfo.password;
+      const pass = userInfo.password;
+      const name = event.target.name.value;
+      const photo = event.target.photo.value;
       
         // console.log(email, password)
         
@@ -52,22 +55,22 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
           const user = result.user;
           console.log(user);
           event.target.reset();
+          handleProfilePhoto(name, photo);
           toast.success("Sign up Success");
         })
         .catch((error) => {
           console.error(error);
         });
   }
-  //  const handleUpdateUserProfile = (name, photoURL) => {
-  //    const profile = {
-  //      displayName: name,
-  //      photoURL: photoURL,
-  //    };
-
-  //    updateUserProfile(profile)
-  //      .then(() => {})
-  //      .catch((error) => console.error(error));
-  //  };
+  const handleProfilePhoto = (name, photo) => {
+    const profile = {
+      displayName: name,
+      photoURL: photo,
+    }
+    userProfileInfo(profile)
+      .then(() => { })
+    .catch((e)=>console.log(e))
+  }
 
   const handleEmail = (event) => {
       const email = event.target.value;
