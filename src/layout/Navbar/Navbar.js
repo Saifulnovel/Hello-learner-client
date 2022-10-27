@@ -1,11 +1,17 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/auth-context";
 import logo from "../../default.png"
 
 const Navbar = () => {
   const [theme, setTheme] = useState(false)
   
+  const { user, logOut } = useContext(AuthContext)
+  // console.log(user.email);
 
   const themeHandler = () => {
     setTheme(dark => !dark)
@@ -110,17 +116,34 @@ const Navbar = () => {
           <li>
             <Link to="/blog">Blog</Link>
           </li>
+          {/* <li>
+            <span>{user?.email}</span>
+          </li> */}
         </ul>
       </div>
 
       <div className="navbar-end">
-        <Link to="/register" className="btn">
-          Get started
-        </Link>
+        {user?.uid ? (
+          <button onClick={logOut} className="btn btn-outline"><FaSignOutAlt></FaSignOutAlt><span className="ml-2">Sign out</span>   </button>
+        ) : (
+          <>
+            {{ user } && (
+              <span>
+                <FaUserCircle />
+              </span>
+            )}
+            <div className="text-white mx-5">
+              <span>{user?.email}</span>
+            </div>
+            <Link to="/register" className="btn">
+              Get started
+            </Link>
+          </>
+        )}
       </div>
       <div onClick={themeHandler} className="form-control mt-1 ml-5">
         {theme ? <p className="ms-1">Dark</p> : <p>Light</p>}
-        <input type="checkbox" className="toggle" checked />
+        <input type="checkbox" className="toggle" />
       </div>
     </div>
   );

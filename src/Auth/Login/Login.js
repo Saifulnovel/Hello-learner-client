@@ -1,26 +1,34 @@
-import { getAuth } from 'firebase/auth';
-import React from 'react';
+// import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useContext } from 'react';
 import { useState } from 'react';
-import { useContext } from 'react';
+
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import app from '../../Config/firebase.config';
+// import app from '../../Config/firebase.config';
 import { AuthContext } from '../../Context/auth-context';
 
-const auth = getAuth(app)
+// const auth = getAuth(app);
+
 
 
 const Login = () => {
-  const {logIn} = useContext(AuthContext)
+  const {emailLogin} = useContext(AuthContext)
   const [error, setError] = useState({ email: "", password: "" });
   const [userInfo, SetUserInfo] = useState({ email: "", password: "" });
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(userInfo);
-    logIn(auth, userInfo.email, userInfo.password)
-      // signInWithEmailAndPassword(auth, userInfo.password, userInfo.email)
+    // console.log(userInfo);
+    const mail = userInfo.email;
+    const pass = userInfo.password;
+     
+
+    emailLogin( mail, pass )
+    // signInWithEmailAndPassword(auth, mail, pass)
       .then((result) => {
+        const user = result.user;
+        console.log(user);
+        event.target.reset()
         toast.success("Login Success");
         // navigate(location?.state?.from?.pathname);
       })
