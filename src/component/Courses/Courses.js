@@ -5,9 +5,9 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const Courses = () => {
     const coursesDetails = useLoaderData();
-    console.log(coursesDetails);
+    
 
-    const { name, title, details, logo, instructor, learner } = coursesDetails;
+    const {id, name, title, details, logo, instructor, learner } = coursesDetails;
 
     return (
       <div className="container w-2/4 rounded-3xl mx-auto mb-16 bg-gray-300">
@@ -23,7 +23,7 @@ const Courses = () => {
               <h2 className="font-bold text-2xl">Instructor : {instructor}</h2>
               <h2>Running student : {learner}</h2>
             </div>
-            <Link className='text-center ' to={'/checkout'}>
+            <Link className='text-center ' to={`/checkout/${id}`}>
               <button className="btn btn-outline">Get Premium Access</button>
             </Link>
           </div>
