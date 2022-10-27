@@ -1,40 +1,47 @@
-import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
-import Login from '../Auth/Login/Login';
-import SignUp from '../Auth/SignUp/SignUp';
-import Courses from '../component/Courses/Courses';
-import Home from '../layout/Main/Home/Home';
-import Main from '../layout/Main/Main';
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import Login from "../Auth/Login/Login";
+import SignUp from "../Auth/SignUp/SignUp";
+import CourseIndex from "../component/Courses/CourseIndex";
 
- const routes = createBrowserRouter([
+import Courses from '../component/Courses/Courses';
+import Home from "../layout/Main/Home/Home";
+import Main from "../layout/Main/Main";
+
+const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Main/>,
+    element: <Main />,
     children: [
       {
         path: "/home",
-        element:<Home/>,
+        element: <Home />,
       },
-      
+
       {
-        path: "/courses",
-        element:<Courses/>,
-        },
-        {
-            path: "/login",
-        element:<Login/>    
-        },
-        {
-            path: "/register",
-            element:<SignUp/>
-        }
-    //   {
-    //     path: "/signup",
-    //     element: <Signup />,
-    //   },
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <SignUp />,
+      },
+      {
+        path: "/courseindex",
+        element: <CourseIndex></CourseIndex>,
+      },
+      {
+        path: "/courses/:id",
+        loader: ({ params }) =>
+          fetch(`https://hello-learner.vercel.app/courses/${params.id}`),
+        element: <Courses></Courses>,
+      },
+      //   {
+      //     path: "/signup",
+      //     element: <Signup />,
+      //   },
     ],
   },
 ]);
-
 
 export default routes;

@@ -1,10 +1,19 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../default.png"
 
 const Navbar = () => {
+  const [theme, setTheme] = useState(false)
+  
+
+  const themeHandler = () => {
+    setTheme(dark => !dark)
+    console.log(theme);
+  }
+
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-orange-400">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -31,7 +40,7 @@ const Navbar = () => {
               <Link to="/home"> Home</Link>
             </li>
             <li>
-              <Link to="/courses">Courses</Link>
+              <Link to="/courseindex">Courses</Link>
             </li>
             {/* <li tabIndex={0}>
               <a className="justify-between">
@@ -65,7 +74,7 @@ const Navbar = () => {
           to="/home"
           className="btn btn-ghost normal-case text-4xl font-bold"
         >
-        Hello Learner
+          Hello Learner
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -74,7 +83,7 @@ const Navbar = () => {
             <Link to="/home"> Home</Link>
           </li>
           <li>
-            <Link to="/courses">Courses</Link>
+            <Link to="/courseindex">Courses</Link>
           </li>
           {/* <li tabIndex={0}>
             <a>
@@ -103,8 +112,15 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+
       <div className="navbar-end">
-        <Link to="/login" className="btn">Get started</Link>
+        <Link to="/register" className="btn">
+          Get started
+        </Link>
+      </div>
+      <div onClick={themeHandler} className="form-control mt-1 ml-5">
+        {theme ? <p className="ms-1">Dark</p> : <p>Light</p>}
+        <input type="checkbox" className="toggle" checked />
       </div>
     </div>
   );

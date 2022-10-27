@@ -5,8 +5,9 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/auth-context';
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from 'firebase/auth';
+import {  FacebookAuthProvider, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import app from '../../Config/firebase.config';
+import { toast } from 'react-toastify';
 
 const auth = getAuth(app)
 
@@ -41,15 +42,17 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
   
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        const email = userInfo.email;
-        const password = userInfo.password;
+        const mail = userInfo.email;
+    const pass = userInfo.password;
+      
         // console.log(email, password)
         
-      register(auth, email, password)
+      register( mail, pass)
         .then((result) => {
           const user = result.user;
           console.log(user);
-          userInfo.reset();
+          event.target.reset();
+          toast.success("Sign up Success");
         })
         .catch((error) => {
           console.error(error);
@@ -108,14 +111,41 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
                 journey . Thank you. Enjoy your Journey with us
               </p>
             </div>
-            <form onSubmit={handleFormSubmit} action="">
+            <form onSubmit={handleFormSubmit}>
               <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Full Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Your Full Name"
+                      name="name"
+                    
+                      className="input input-bordered"
+                    />
+                   
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Photo URL</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Select Your photo"
+                      name="photo"
+                     
+                      className="input input-bordered"
+                    />
+                    
+                  </div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Email</span>
                     </label>
                     <input
+                      required
                       type="text"
                       placeholder="email"
                       name="email"
@@ -131,6 +161,7 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
                       <span className="label-text">Password</span>
                     </label>
                     <input
+                      required
                       type="text"
                       placeholder="password"
                       name="email"
@@ -162,7 +193,10 @@ const { providerLogin, fbLoginProvider, register } = useContext(AuthContext);
           <h2 className="text-center font-bold text-2xl">OR</h2>
           <div className=" bg-base-100 p-8 shadow-gray-700 shadow-2xl hover:shadow-lg rounded-lg">
             <div className="mt-5">
-              <button onClick={handleFacebookSignin} className="btn btn-outline btn-info mb-4 ">
+              <button
+                onClick={handleFacebookSignin}
+                className="btn btn-outline btn-info mb-4 "
+              >
                 <FaFacebook className="mr-5 text-2xl" /> Sign in With Facebook
               </button>
             </div>
